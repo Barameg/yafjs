@@ -17,7 +17,17 @@ class Stack extends Component {
             }
         })
         this.pages = []
+        let id = params.id
+        let classes = params.classes
+        let attributes = params.attributes
         let pageStack = document.createElement('div')
+        pageStack.id = id
+        classes.forEach(className => {
+            pageStack.classList.add(className)
+        })
+        for (const [key, value] of Object.entries(attributes)) {
+            pageStack.setAttribute(key, value)
+        }
         this.element = pageStack
         return this
     }
@@ -38,49 +48,52 @@ class Page extends Component{
         let keys = ['id', 'classes', 'attributes']
         keys.forEach(key=>{
             if(!params[key]){
-                return
+                throw 'ERROR: missing Page '+key+' parameter'
             }
         })
         let id = params.id
         let classes = params.classes
+        let attributes = params.attributes
         let page = document.createElement('div')
         page.id = id
         classes.forEach(className => {
             page.classList.add(className)
         })
+        for (const [key, value] of Object.entries(attributes)) {
+            page.setAttribute(key, value)
+        }
         this.element = page
         return this
     }
     show(){
-        console.log(this.element)
         this.element.classList.remove('hidden')
-        console.log(this.element)
         return this
     }
     hide(){
-        console.log(this.element.classList)
         this.element.classList.add('hidden')
-        console.log(this.element.classList)
         return this
     }
 }
 class Button extends Component{
     constructor(params){
         super(params)
-        let keys = ['id', 'classes']
+        let keys = ['id', 'classes', 'attributes']
         keys.forEach(key=>{
             if(!params[key]){
-                console.log(key, 'is missing')
-                return
+                throw 'ERROR: missing Page '+key+' parameter'
             }
         })
         let id = params.id
         let classes = params.classes
+        let attributes = params.attributes
         let button = document.createElement('button')
         button.id = id
         classes.forEach(className => {
             button.classList.add(className)
         });
+        for (const [key, value] of Object.entries(attributes)) {
+            button.setAttribute(key, value)
+        }
         return button
     }
 }
@@ -88,20 +101,23 @@ class Button extends Component{
 class Input extends Component{
     constructor(params){
         super(params)
-        let keys = ['id', 'classes']
+        let keys = ['id', 'classes', 'attributes']
         keys.forEach(key=>{
             if(!params[key]){
-                console.log(key, 'is missing')
-                return
+                throw 'ERROR: missing Page '+key+' parameter'
             }
         })
         let id = params.id
         let classes = params.classes
+        let attributes = params.attributes
         let input = document.createElement('input')
         input.id = id
         classes.forEach(className => {
             input.classList.add(className)
         });
+        for (const [key, value] of Object.entries(attributes)) {
+            input.setAttribute(key, value)
+        }
         return input
     }
 }
